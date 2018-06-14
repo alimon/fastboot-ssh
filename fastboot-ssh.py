@@ -41,10 +41,10 @@ import signal
 
 
 FASTBOOT_CMD = "/usr/bin/fastboot"
-CONFIGS = [os.path.join(os.getcwd(), 'fastboot_ssh.conf'),
-           '/etc/fastboot_ssh.conf']
-if 'FASTBOOT_SSH_CONFIG' in os.environ:
-    CONFIGS.insert(0,os.environ['FASTBOOT_SSH_CONFIG'])
+CONFIGS = [os.path.join(os.getcwd(), 'dut-ssh.conf'),
+           '/etc/dut-ssh.conf']
+if 'DUT_SSH_CONFIG' in os.environ:
+    CONFIGS.insert(0,os.environ['DUT_SSH_CONFIG'])
 REMOTE_FASTBOOT_DIR='lava-fastboot'
 
 
