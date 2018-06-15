@@ -98,6 +98,8 @@ def _handle_fastboot_files(device):
             break
         except ValueError:
             continue
+    if fcmd_index == -1:
+        return remote_files
 
     local_files = sys.argv[fcmd_index:]
 
