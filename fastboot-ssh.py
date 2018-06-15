@@ -107,6 +107,9 @@ def _handle_fastboot_files(device):
         cmd = ['ssh', device['host'], 'mkdir', '-p', REMOTE_FASTBOOT_DIR]
         _execute_command(cmd)
         for f in local_files:
+            if not os.path.exists(f): # XXX: end of files
+                break
+
             remote_file = os.path.join(REMOTE_FASTBOOT_DIR, os.path.basename(f))
             cmd = ['scp', f, '%s:%s' % (device['host'], remote_file)]
             _execute_command(cmd)
