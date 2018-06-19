@@ -136,6 +136,12 @@ def main():
     if device:
         remote_files = _handle_fastboot_files(device)
 
+        if 'fastboot_set_active' in device:
+            cmd = ['ssh', device['host'], 'fastboot', '-s',
+                   device['fastboot_serial'], 'set_active',
+                   device['fastboot_set_active']]
+            _execute_command(cmd)
+
         cmd = ['ssh', device['host'], 'fastboot']
         cmd.extend(sys.argv[1:])
         rc = _execute_command(cmd)
