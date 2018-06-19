@@ -110,7 +110,7 @@ def _handle_fastboot_files(device):
             if not os.path.exists(f): # XXX: end of files
                 break
 
-            remote_file = os.path.join(REMOTE_FASTBOOT_DIR, os.path.basename(f))
+            remote_file = os.path.join(REMOTE_FASTBOOT_DIR, '%s-%s' % (device['board'], os.path.basename(f)))
             cmd = ['scp', f, '%s:%s' % (device['host'], remote_file)]
             _execute_command(cmd)
             remote_files.append(remote_file)
