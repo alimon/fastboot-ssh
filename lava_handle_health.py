@@ -61,9 +61,9 @@ hostnames = []
 for d in device_config['devices']:
     if 'lava_hostname' in d:
         hostnames.append(d['lava_hostname'])
-
 devices = server.scheduler.devices.list()
-for d in devices:
-    for h in hostnames:
+
+for h in hostnames:
+    for d in devices:
         if h == d['hostname'] and d['health'] == 'Bad':
             server.scheduler.devices.update(h, worker_hostname, None, None, True, 'UNKNOWN', 'Created automatically by LAVA.')
