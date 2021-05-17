@@ -61,7 +61,7 @@ def _execute_command(cmd):
 
 def _load_device_config(config):
     with open(config, 'r') as f:
-        return yaml.load(f.read())
+        return yaml.safe_load(f.read())
 
 
 def _fastboot_get_device_serial():
