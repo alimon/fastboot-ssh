@@ -104,7 +104,7 @@ def _handle_fastboot_files(device):
     local_files = sys.argv[fcmd_index:]
 
     if local_files:
-        cmd = ['ssh', device['host'], 'mkdir', '-p', REMOTE_FASTBOOT_DIR]
+        cmd = ['ssh', '-t', device['host'], 'mkdir', '-p', REMOTE_FASTBOOT_DIR]
         _execute_command(cmd)
         for f in local_files:
             if not os.path.exists(f): # XXX: end of files
@@ -137,17 +137,17 @@ def main():
         remote_files = _handle_fastboot_files(device)
 
         if 'fastboot_set_active' in device:
-            cmd = ['ssh', device['host'], 'fastboot', '-s',
+            cmd = ['ssh', '-t', device['host'], 'fastboot', '-s',
                    device['fastboot_serial'], 'set_active',
                    device['fastboot_set_active']]
             _execute_command(cmd)
 
-        cmd = ['ssh', device['host'], 'fastboot']
+        cmd = ['ssh', '-t', device['host'], 'fastboot']
         cmd.extend(sys.argv[1:])
         rc = _execute_command(cmd)
 
         for f in remote_files:
-            cmd = ['ssh', device['host'], 'rm', f]
+            cmd = ['ssh', '-t', device['host'], 'rm', f]
             _execute_command(cmd)
     else:
         cmd = [FASTBOOT_CMD]
